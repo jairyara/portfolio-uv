@@ -1,0 +1,75 @@
+---
+const navLinks = [
+  { href: '/#sobre-mi', label: 'Sobre mí' },
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/#servicios', label: 'Servicios' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#contacto', label: 'Contacto' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 inset-x-0 z-50">
+  <div class="mx-auto max-w-6xl px-6 py-4">
+    <nav class="card-glass px-6 py-3 flex items-center justify-between border-glow">
+      <!-- Logo -->
+      <a href="/" class="font-display font-bold text-lg flex items-center gap-2 group">
+        <span class="w-7 h-7 rounded-lg bg-acid flex items-center justify-center text-ink text-xs font-mono font-bold group-hover:scale-110 transition-transform">
+          JM
+        </span>
+        <span class="text-white">Jair<span class="text-acid">.</span></span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-1">
+        {navLinks.map(link => (
+          <li>
+            <a 
+              href={link.href}
+              class="px-4 py-2 rounded-lg text-sm font-display font-medium text-slate-soft hover:text-white hover:bg-white/5 transition-all duration-200"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- CTA -->
+      <a href="/#contacto" class="btn-primary text-xs hidden md:inline-flex">
+        Trabajemos juntos
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" class="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors" aria-label="Menú">
+        <svg id="menu-icon" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-2 card-glass px-6 py-4 space-y-1">
+      {navLinks.map(link => (
+        <a 
+          href={link.href}
+          class="block px-4 py-2.5 rounded-lg text-sm font-display font-medium text-slate-soft hover:text-white hover:bg-white/5 transition-all"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="pt-3 border-t border-white/5">
+        <a href="/#contacto" class="btn-primary w-full justify-center text-sm">Trabajemos juntos</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>
