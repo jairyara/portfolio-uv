@@ -17,53 +17,57 @@
     <div class="grid md:grid-cols-5 gap-8">
       <!-- Form -->
       <div class="md:col-span-3 card-glass p-7 rounded-2xl border-glow">
-        <form name="contact" method="POST" data-netlify="true" class="space-y-5" id="contact-form">
-          <input type="hidden" name="form-name" value="contact" />
+        <form id="contact-form" class="space-y-5">
+          <!-- Honeypot - invisible para humanos -->
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
-              <label class="block text-xs font-mono text-slate-soft mb-2 uppercase tracking-wider">Nombre</label>
-              <input 
-                type="text" name="name" required
-                placeholder="Tu nombre"
-                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 focus:outline-none focus:border-acid/50 focus:bg-acid/5 transition-colors"
-              />
+              <label class="block text-xs font-mono mb-2 uppercase tracking-wider" style="color: var(--color-slate-soft)">Nombre</label>
+              <input type="text" name="name" required placeholder="Tu nombre"
+                     class="w-full border rounded-xl px-4 py-3 text-white text-sm focus:outline-none transition-colors"
+                     style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10);" />
             </div>
             <div>
-              <label class="block text-xs font-mono text-slate-soft mb-2 uppercase tracking-wider">Email</label>
-              <input 
-                type="email" name="email" required
-                placeholder="tu@empresa.com"
-                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 focus:outline-none focus:border-acid/50 focus:bg-acid/5 transition-colors"
-              />
+              <label class="block text-xs font-mono mb-2 uppercase tracking-wider" style="color: var(--color-slate-soft)">Email</label>
+              <input type="email" name="email" required placeholder="tu@empresa.com"
+                     class="w-full border rounded-xl px-4 py-3 text-white text-sm focus:outline-none transition-colors"
+                     style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10);" />
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-mono text-slate-soft mb-2 uppercase tracking-wider">Servicio de interés</label>
-            <select 
-              name="service"
-              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/70 text-sm focus:outline-none focus:border-acid/50 transition-colors"
-            >
-              <option value="" class="bg-ink">Selecciona una opción</option>
-              <option value="web" class="bg-ink">Desarrollo Web</option>
-              <option value="cyber" class="bg-ink">Ciberseguridad</option>
-              <option value="saas" class="bg-ink">Producto SaaS</option>
-              <option value="infra" class="bg-ink">Infraestructura / Hosting</option>
-              <option value="otro" class="bg-ink">Otro</option>
+            <label class="block text-xs font-mono mb-2 uppercase tracking-wider" style="color: var(--color-slate-soft)">Servicio de interés</label>
+            <select name="service"
+                    class="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
+                    style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10); color: rgba(255,255,255,0.7);">
+              <option value="" style="background:#0A0A0F">Selecciona una opción</option>
+              <option value="web" style="background:#0A0A0F">Desarrollo Web</option>
+              <option value="cyber" style="background:#0A0A0F">Ciberseguridad</option>
+              <option value="saas" style="background:#0A0A0F">Producto SaaS</option>
+              <option value="infra" style="background:#0A0A0F">Infraestructura / Hosting</option>
+              <option value="otro" style="background:#0A0A0F">Otro</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-xs font-mono text-slate-soft mb-2 uppercase tracking-wider">Mensaje</label>
-            <textarea 
-              name="message" rows="4" required
-              placeholder="Cuéntame sobre tu proyecto, presupuesto aproximado y timeline..."
-              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 focus:outline-none focus:border-acid/50 focus:bg-acid/5 transition-colors resize-none"
-            ></textarea>
+            <label class="block text-xs font-mono mb-2 uppercase tracking-wider" style="color: var(--color-slate-soft)">Mensaje</label>
+            <textarea name="message" rows="4" required placeholder="Cuéntame sobre tu proyecto..."
+                      class="w-full border rounded-xl px-4 py-3 text-white text-sm focus:outline-none transition-colors resize-none"
+                      style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.10);"></textarea>
           </div>
 
-          <button type="submit" class="btn-primary w-full justify-center text-sm" id="submit-btn">
+          <!-- Feedback -->
+          <div id="form-success" class="hidden rounded-xl px-4 py-3 text-sm"
+               style="background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.3); color: var(--color-acid)">
+            ✓ Mensaje enviado. Te respondo pronto.
+          </div>
+          <div id="form-error" class="hidden rounded-xl px-4 py-3 text-sm"
+               style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171">
+            Hubo un error al enviar. Intenta de nuevo o escríbeme directo.
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn-primary w-full justify-center text-sm">
             <span id="btn-text">Enviar mensaje</span>
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
@@ -146,3 +150,38 @@
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLSpanElement;
+  const success = document.getElementById('form-success') as HTMLDivElement;
+  const error = document.getElementById('form-error') as HTMLDivElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btnText.textContent = 'Enviando...';
+    success.classList.add('hidden');
+    error.classList.add('hidden');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+
+      if (res.ok) {
+        success.classList.remove('hidden');
+        form.reset();
+      } else {
+        error.classList.remove('hidden');
+      }
+    } catch {
+      error.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btnText.textContent = 'Enviar mensaje';
+    }
+  });
+</script>
