@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
 
-const posts = await Astro.glob('./blog/*.{md,mdx}');
-const sortedPosts = posts.sort((a, b) => 
-  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -31,47 +31,44 @@ const sortedPosts = posts.sort((a, b) =>
 
       <!-- Posts list -->
       <div class="space-y-4">
-        {sortedPosts.map(post => {
-          const date = new Date(post.frontmatter.date).toLocaleDateString('es-CO', {
+        {posts.map(post => {
+          const date = new Date(post.data.pubDate).toLocaleDateString('es-CO', {
             year: 'numeric', month: 'long', day: 'numeric'
           });
           return (
-            <a 
-              href={post.url} 
-              class="card-glass p-6 rounded-2xl flex flex-col md:flex-row md:items-center gap-4 hover:border-acid/20 transition-all duration-300 group block"
-            >
+
+              <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}/`}
+          class="card-glass p-6 rounded-2xl flex flex-col md:flex-row md:items-center gap-4 hover:border-white/10 transition-all duration-300 group block mb-4"
+              >
               <div class="flex-1">
                 <div class="flex flex-wrap gap-2 mb-3">
-                  {post.frontmatter.tags.slice(0, 3).map((tag: string) => (
-                    <span class="tag text-xs">{tag}</span>
+                  {post.data.tags?.slice(0, 3).map((tag: string) => (
+                      <span class="tag">{tag}</span>
                   ))}
                 </div>
-                <h2 class="font-display font-bold text-lg text-white group-hover:text-acid transition-colors mb-1.5">
-                  {post.frontmatter.title}
+                <h2 class="font-display font-bold text-lg text-white mb-1.5"
+                    style="font-family: var(--font-display)">
+                  {post.data.title}
                 </h2>
-                <p class="text-slate-soft text-sm leading-relaxed line-clamp-2">
-                  {post.frontmatter.description}
+                <p class="text-sm leading-relaxed" style="color: var(--color-slate-soft)">
+                  {post.data.description}
                 </p>
               </div>
               <div class="flex flex-col items-end shrink-0 gap-2">
-                <time class="text-xs font-mono text-white/30">{date}</time>
-                <span class="text-xs font-mono text-acid/70">{post.frontmatter.readTime}</span>
-                <svg class="w-4 h-4 text-acid opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                <time class="text-xs" style="font-family: var(--font-mono); color: rgba(255,255,255,0.3)">
+                  {date}
+                </time>
+                <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all"
+                     style="color: var(--color-acid)"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
               </div>
-            </a>
+          </a>
           );
         })}
-      </div>
-
-      {sortedPosts.length === 0 && (
-        <div class="card-glass rounded-2xl p-12 text-center">
-          <div class="text-4xl mb-4">✍️</div>
-          <h3 class="font-display font-bold text-white mb-2">Próximamente</h3>
-          <p class="text-slate-soft text-sm">Los primeros artículos están en camino.</p>
-        </div>
-      )}
+    </div>
     </div>
   </main>
 

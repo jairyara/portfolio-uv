@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: "Zero Trust para PYMEs colombianas: cómo empezar sin morir en el intento"
 description: "El modelo Zero Trust ya no es exclusivo de grandes empresas. En este artículo explico cómo las PYMEs colombianas pueden adoptar sus principios con herramientas accesibles y sin un equipo de seguridad dedicado."
-date: "2024-11-15"
+pubDate: 2024-11-15
 tags: ["Ciberseguridad", "Zero Trust", "PYMEs", "Colombia"]
 readTime: "8 min"
 ---

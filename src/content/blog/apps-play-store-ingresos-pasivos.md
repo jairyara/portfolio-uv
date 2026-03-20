@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: "3 apps en Play Store, 150 USD/mes: lo que aprendí generando ingresos pasivos como dev"
 description: "Cómo construí y moneticé tres aplicaciones Android con AdMob sin ser desarrollador móvil de carrera. Números reales, lecciones reales y lo que haría diferente hoy."
-date: "2025-01-10"
+pubDate: 2025-01-10
 tags: ["Android", "Ingresos Pasivos", "AdMob", "Indie Dev"]
 readTime: "10 min"
 ---

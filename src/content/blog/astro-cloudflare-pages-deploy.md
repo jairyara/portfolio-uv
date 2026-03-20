@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPost.astro
 title: "Cómo desplegué mi portafolio en Cloudflare Pages con Astro (y qué aprendí)"
 description: "Guía práctica para deployar un sitio Astro en Cloudflare Pages desde un repositorio de GitHub. Configuración de dominio personalizado con Namecheap y optimizaciones que marcan la diferencia."
-date: "2024-12-02"
+pubDate: 2024-12-02
 tags: ["Astro", "Cloudflare", "Deploy", "Frontend"]
 readTime: "6 min"
 ---
