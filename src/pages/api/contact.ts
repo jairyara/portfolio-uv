@@ -250,7 +250,7 @@ export const POST: APIRoute = async ({ request }) => {
                 html: notificationHtml,
             }),
             resend.emails.send({
-                from: 'Jair Yara <hola@jairyara.dev>',
+                from: 'Jair Yara <no-reply@jairyara.dev>',
                 to: email,
                 subject: `Recibí tu mensaje, ${name.split(' ')[0]} ✔`,
                 html: confirmationHtml,
