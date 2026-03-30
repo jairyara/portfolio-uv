@@ -1,11 +1,12 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+// @ts-ignore - cloudflare:workers is available at runtime in CF Workers
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
-    const runtime = (locals as any).runtime;
-    const apiKey = runtime?.env?.RESEND_API_KEY;
+export const POST: APIRoute = async ({ request }) => {
+    const apiKey = (env as any).RESEND_API_KEY;
 
     const data = await request.formData();
     const name    = data.get('name')?.toString() || '';
