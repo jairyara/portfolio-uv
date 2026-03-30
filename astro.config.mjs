@@ -9,7 +9,7 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://jairyara.dev',
-	output: 'hybrid',
+	output: 'static',
 	adapter: cloudflare({ platformProxy: { enabled: true } }),
 	integrations: [mdx(), sitemap()],
 	  vite: {
